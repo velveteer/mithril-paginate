@@ -7,14 +7,13 @@ The module is wrapped in a constructor so that multiple instances can be used wi
 Example usage:
 
 ```
-
 // Instantiate new paginate module
 paginate = new Mpaginate();
 
 // Example list data
 var list = [];
 for (var i = 0; i<50; i++) {
-    list.push({'Random': i*Math.random(), 'Name':'John #'+i, 'Clone': i, 'Born': new Date(2014, 2, i)})
+    list.push({'Name':'John #'+i, 'Clone': i, 'Born': new Date(2014, 2, i)})
 }
 
 // Get JSON async (can be replaced with m.request)
@@ -30,7 +29,6 @@ var getList = function() {
 
 getList().then(paginate.list);
 m.module(document.body, paginate);
-
 ```
 
 A table will be rendered using the default properties of the module. Properties that can be set include:
