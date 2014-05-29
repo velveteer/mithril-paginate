@@ -6,7 +6,8 @@ The module is wrapped in a constructor so that multiple instances can be used wi
 
 Example usage:
 
-`
+```
+
 // Instantiate new paginate module
 paginate = new Mpaginate();
 
@@ -29,20 +30,29 @@ var getList = function() {
 
 getList().then(paginate.list);
 m.module(document.body, paginate);
-`
+
+```
 
 A table will be rendered using the default properties of the module. Properties that can be set include:
 
-`paginate.list(); // Default: [] // Accepts JSON.`
-`paginate.rowsPerPage(); // Default: 5`
-`paginate.headers(); // Default: JSON keys. Accepts a list of strings or functions. Populates table headers.`
-`paginate.cells(); // Default: JSON values. Accepts a list of strings or functions. Populates table cells.`
-`paginate.rowAttr(); // Default: {}. Accepts an object for setting attributes on table rows.`
+####paginate.list()
++ Default: []. Accepts JSON.
+
+####paginate.rowsPerPage()
++ Default: 5
+
+####paginate.headers()
++ Default: JSON keys. Accepts a list of strings or functions. Populates table headers.
+
+####paginate.cells()
++ Default: JSON values. Accepts a list of strings or functions. Populates table cells.
+
+####paginate.rowAttr()
++ Default: {}. Accepts an object for setting attributes on table rows.
 
 This is a work in progress and there are bugs. Contributions and criticisms are welcome.
 
 ### Example
-<iframe width="100%" height="300" src="http://jsfiddle.net/Pu6r5/5/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
+[http://jsfiddle.net/Pu6r5/5/](http://jsfiddle.net/Pu6r5/5/)
 
 
