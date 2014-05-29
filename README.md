@@ -48,9 +48,11 @@ A table will be rendered using the default properties of the module. Properties 
 ####paginate.rowAttr()
 + Default: {}. Accepts an object for setting attributes on table rows.
 
-This is a work in progress and there are bugs. Contributions and criticisms are welcome.
 
 ### Example
 [http://jsfiddle.net/Pu6r5/5/](http://jsfiddle.net/Pu6r5/5/)
+
+### Notes
+This is a work in progress and there are bugs. Contributions and criticisms are welcome.
 
 
