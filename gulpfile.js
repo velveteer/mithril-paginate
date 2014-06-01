@@ -38,8 +38,11 @@ gulp.task('scripts', function() {
             .pipe(plugins.jshint.reporter(require('jshint-stylish'))),
 
         // Concatenate, minify and copy all JavaScript (except vendor scripts)
-        gulp.src(['!./src/scripts/vendor/**/*.js', './src/scripts/**/*.js'])
-            .pipe(plugins.concat('app.js'))
+        gulp.src(['!./src/scripts/vendor/**/*.js', './src/scripts/app.js'])
+            .pipe(plugins.browserify({
+                insertGlobals: true,
+                debug: !gulp.env.production
+            }))
 //            .pipe(plugins.uglify())
             .pipe(gulp.dest('./dist/scripts'))
     );
