@@ -10,7 +10,7 @@ var mpaginate = require('./mpaginate.js');
 // Mock some data
 var list1 = [];
 for (var i = 0; i<50; i++) {
-    list1.push({'Random': i*Math.random(), 'Name':'John #'+i, 'Clone': i, 'Born': new Date(2014, 2, i)})
+    list1.push({'Name':'John #'+i, 'Clone': i, 'Born': new Date(2014, 2, i)})
 }
 
 // Get list async -- m.request can also be used here
@@ -36,8 +36,8 @@ var isEven = function() { return this.Clone % 2 ? 'no' : 'yes'};
 
 // Set mpaginate options
 grid.options = {
-    headers: ['Name', 'Clone', 'Born', 'Even', 'Random'],
-    cells: [nameLink, 'Clone', 'Born', isEven, 'Random']
+    headers: ['Name', 'Clone', 'Born', 'Even'],
+    cells: [nameLink, 'Clone', 'Born', isEven]
 }
 
 // Inject mpaginate controller into parent controller
