@@ -1,23 +1,20 @@
 ## Mithril-Paginate
 
-An example Mithril module that takes a list of objects in JSON and paginates it.
-
-The module is wrapped in a constructor so that multiple instances can be used within a single app.
+A Mithril component that takes a list of objects in JSON and paginates it.
 
 Example usage:
 
 ```
-// Instantiate new paginate module
-paginate = new Mpaginate();
+var mpaginate = require('./mpaginate.js');
 
-// Example list data
-var list = [];
+// Mock some data
+var list1 = [];
 for (var i = 0; i<50; i++) {
-    list.push({'Name':'John #'+i, 'Clone': i, 'Born': new Date(2014, 2, i)})
+    list1.push({'Random': i*Math.random(), 'Name':'John #'+i, 'Clone': i, 'Born': new Date(2014, 2, i)})
 }
 
-// Get JSON async (can be replaced with m.request)
-var getList = function() {
+// Get list async -- m.request can also be used here
+var getList = function(list) {
     m.startComputation();
     var deferred = m.deferred();
     setTimeout(function() {
@@ -27,32 +24,57 @@ var getList = function() {
     return deferred.promise;
 };
 
-getList().then(paginate.list);
-m.module(document.body, paginate);
+// Module namespace
+var grid = {};
+
+// Model
+grid.list = m.prop([]);
+
+// Custom cell functions
+var nameLink = function() { return [ m('a', {href: 'profile/' + this.Name}, this.Name) ]};
+var isEven = function() { return this.Clone % 2 ? 'no' : 'yes'};
+
+// Set mpaginate options
+grid.options = {
+    headers: ['Name', 'Clone', 'Born', 'Even', 'Random'],
+    cells: [nameLink, 'Clone', 'Born', isEven, 'Random']
+}
+
+// Inject mpaginate controller into parent controller
+grid.controller = function() {
+    this.mpaginate = new mpaginate.controller(grid.list, grid.options);
+}
+
+// Hook mpaginate view into parent view
+grid.view = function(ctrl) {
+    return mpaginate.view(ctrl.mpaginate);
+}
+
+// Get list async then populate model
+getList(list1).then(grid.list)
+
+// Instantiate Mithril model
+m.module(document.body, grid);
+
 ```
 
-A table will be rendered using the default properties of the module. Properties that can be set include:
+The controller takes a list to be paginated and an optional options object. Options include:
 
-####paginate.list()
-+ Default: []. Accepts JSON.
-
-####paginate.rowsPerPage()
+####rowsPerPage
 + Default: 5
 
-####paginate.headers()
+####headers
 + Default: JSON keys. Accepts a list of strings or functions. Populates table headers.
 
-####paginate.cells()
+####cells
 + Default: JSON values. Accepts a list of strings or functions. Populates table cells.
 
-####paginate.rowAttr()
+####rowAttr
 + Default: {}. Accepts an object for setting attributes on table rows.
 
 
 ### Example
-[http://jsfiddle.net/Pu6r5/5/](http://jsfiddle.net/Pu6r5/5/)
+[http://jsfiddle.net/Pu6r5/7/](http://jsfiddle.net/Pu6r5/7/)
 
 ### Notes
 This is a work in progress and there are bugs. Contributions and criticisms are welcome.
-
-
