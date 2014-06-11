@@ -41,7 +41,6 @@ gulp.task('scripts', function() {
         gulp.src(['!./src/scripts/vendor/**/*.js', './src/scripts/app.js'])
             .pipe(plugins.browserify({
                 insertGlobals: true,
-                debug: !gulp.env.production
             }))
 //            .pipe(plugins.uglify())
             .pipe(gulp.dest('./dist/scripts'))
